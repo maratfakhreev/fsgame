@@ -1,4 +1,5 @@
 import React from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Reflux from 'reflux';
 import Styles from '../welcome/welcome_styles';
 import EntitiesActions from '../../actions/entities';
@@ -30,9 +31,16 @@ const Welcome = React.createClass({
     return (
       <View style={ Styles.container }>
         <Text style={ Styles.welcome }>
-          Welcome to React Native!{'\n'}{'\n'}
+          Welcome to React Native!
+          {'\n'}{'\n'}
 
           Reflux state: { this.state.msg }
+          {'\n'}
+        </Text>
+        <Icon name="github" size={ 60 } color="#666" />
+        <Text>
+          github.com/maratfakhreev/react-native-base
+          {'\n'}{'\n'}
         </Text>
         <Text style={ Styles.instructions }>
           To get started, edit index.ios.js
