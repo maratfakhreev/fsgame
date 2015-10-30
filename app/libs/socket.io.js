@@ -5,6 +5,7 @@
 // make for( ... ); to for( ... ){}
 
 window.navigator.userAgent = 'react-native';
-const io = require('socket.io-client/socket.io');
+import io from 'socket.io-client/socket.io';
+const socket = io('ws://ws.pusherapp.com/app/21752c7b30492cf90200?protocol=7&client=js&version=3.0.0&flash=false', { jsonp: false });
 
-module.exports = io;
+module.exports = socket;
