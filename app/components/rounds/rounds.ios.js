@@ -1,7 +1,7 @@
 import React from 'react-native';
 import Reflux from 'reflux';
 import Round from '../round/round';
-import GameStore from '../../stores/game';
+import RoundStore from '../../stores/round';
 import GameActions from '../../actions/game';
 
 const {
@@ -11,7 +11,7 @@ const {
 } = React;
 
 const RoundsList = React.createClass({
-  mixins: [Reflux.listenTo(GameStore, 'getRounds')],
+  mixins: [Reflux.listenTo(RoundStore, 'getRounds')],
 
   getInitialState() {
     return {
@@ -19,7 +19,7 @@ const RoundsList = React.createClass({
     }
   },
 
-  componentDidMount() {
+  componentWillMount() {
     GameActions.get();
   },
 
@@ -30,7 +30,6 @@ const RoundsList = React.createClass({
   },
 
   renderRow(round) {
-    console.log(round);
     return <Round data={ round }/>;
   },
 

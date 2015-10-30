@@ -2,56 +2,27 @@ import React from 'react-native';
 import Reflux from 'reflux';
 import Config from '../config';
 import GameActions from '../actions/game';
+import UUIDGenerator from '../libs/uuid';
 
-const GameStores = Reflux.createStore({
+const GameStore = Reflux.createStore({
   listenables: [GameActions],
 
-  onChoose() {
+  onInit() {
+    this.uuid = UUIDGenerator();
+    const url = `${Config.apiPath}/games?uuid=${this.uuid}`;
 
-  },
-
-  onGet() {
-    // const url = `${Config.apiPath}/game`;
-    // const type = 'get';
-    // const params = '';
-
-    // fetch(url, {
-    //   method: type,
-    //   body: params,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   }
-    // })
-    // .then((result) => result.json())
-    // .then((result) => {
-    //   this.trigger(result);
-    // });
-    const data = [
-      {
-        "you": { "money": 300, "card": 3 },
-        "opponent": { "money": 500, "card": 1 }
-      },
-      {
-        "you": { "money": 300, "card": 3 },
-        "opponent": { "money": 500, "card": 1 }
-      },
-      {
-        "you": { "money": 300, "card": 3 },
-        "opponent": { "money": 500, "card": 1 }
-      },
-      {
-        "you": { "money": 300, "card": 3 },
-        "opponent": { "money": 500, "card": 1 }
-      },
-      {
-        "you": { "money": 300, "card": 3 },
-        "opponent": { "money": 500, "card": 1 }
+    fetch(url, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-    ];
-
-    this.trigger(data);
-  }
+    })
+    .then((result) => result.json())
+    .then((result) => {
+      this.trigger(result.uuid);
+    });
+  },
 });
 
-module.exports = GameStores;
+module.exports = GameStore;

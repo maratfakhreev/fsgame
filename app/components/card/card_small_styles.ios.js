@@ -4,13 +4,16 @@ const { StyleSheet } = React;
 
 module.exports = StyleSheet.create({
   card: {
-    flex: 0.2,
-    height: 90,
+    flex: 0.18,
+    height: 80,
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#999',
-    borderRadius: 8
+    borderColor: 'rgba(235, 113, 107, 0.8)',
+    borderRadius: 8,
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
+    shadowOpacity: 0.8,
+    shadowRadius: 1
   },
   cardInner: {
     flex: 1,
@@ -29,7 +32,8 @@ module.exports = StyleSheet.create({
     right: 0,
     backgroundColor: '#fff',
     textAlign: 'center',
-    fontSize: 10
+    fontSize: 10,
+    color: 'rgba(51, 51, 50, 0.8)'
   },
   round: {
     paddingTop: 8,
@@ -43,6 +47,10 @@ module.exports = StyleSheet.create({
     flex: 0.6,
     flexDirection: 'row',
     textAlign: 'center',
-    marginTop: 35
+    marginTop: 35,
+    color: 'rgba(51, 51, 50, 0.8)'
   },
+  win: {
+    color: 'rgba(235, 113, 107, 1)'
+  }
 });

@@ -2,9 +2,11 @@ import React from 'react-native';
 import Reflux from 'reflux';
 import Styles from '../game/game_styles';
 import GameActions from '../../actions/game';
-import EntitiesStore from '../../stores/game';
+import GameStore from '../../stores/game';
+import UserStore from '../../stores/user';
 import Socket from '../../libs/socket.io';
 import Card from '../card/card';
+import Header from '../header/header';
 import CardStyles from '../card/card_big_styles';
 import Rounds from '../rounds/rounds';
 
@@ -16,31 +18,38 @@ const {
 } = React;
 
 const Game = React.createClass({
-  mixins: [Reflux.listenTo(EntitiesStore, 'setMessage')],
+  mixins: [
+    Reflux.listenTo(GameStore, 'setUUID'),
+    Reflux.listenTo(UserStore, 'setUserType')
+  ],
 
   getInitialState() {
     return {
-      msg: 'Reflux is not ready to use'
+      uuid: null,
+      game: {
+        you: { money: 0 },
+        opponent: { money: 0 }
+      }
     }
   },
 
-  setMessage(msg) {
-    this.setState({ msg });
+  componentDidMount() {
+    GameActions.init();
+    GameActions.start();
+  },
+
+  setUUID(uuid) {
+    this.setState({ uuid });
+  },
+
+  setUserType(game) {
+    this.setState({ game });
   },
 
   render() {
     return (
       <View style={ Styles.container }>
-        <View style={ Styles.header }>
-          <View style={ Styles.player }>
-            <Text style={ Styles.textCircle }>You</Text>
-            <Text>5</Text>
-          </View>
-          <View style={ Styles.player }>
-            <Text style={ Styles.textCircle }>He</Text>
-            <Text>500</Text>
-          </View>
-        </View>
+        <Header game={ this.state.game } />
 
         <ScrollView
           automaticallyAdjustContentInsets={ false }
@@ -53,9 +62,24 @@ const Game = React.createClass({
         </ScrollView>
 
         <View style={ Styles.cards }>
-          <Card clickable={ true } styles={ CardStyles } type={ 1 }/>
-          <Card clickable={ true } styles={ CardStyles } type={ 2 }/>
-          <Card clickable={ true } styles={ CardStyles } type={ 3 }/>
+          <Card
+            clickable={ true }
+            styles={ CardStyles }
+            type={ 1 }
+            game={ this.state.game }
+          />
+          <Card
+            clickable={ true }
+            styles={ CardStyles }
+            type={ 2 }
+            game={ this.state.game }
+          />
+          <Card
+            clickable={ true }
+            styles={ CardStyles }
+            type={ 3 }
+            game={ this.state.game }
+          />
         </View>
       </View>
     );
