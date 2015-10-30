@@ -1,6 +1,6 @@
 import React from 'react-native';
-import Welcome from './app/components/welcome/welcome';
+import Game from './app/components/game/game';
 
 const { AppRegistry } = React;
 
-AppRegistry.registerComponent('ReactNativeBase', () => Welcome);
+AppRegistry.registerComponent('ReactNativeBase', () => Game);
