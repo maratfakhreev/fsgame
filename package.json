@@ -12,6 +12,7 @@
     "react-native-blur": "^0.7.5",
     "react-native-vector-icons": "^0.8.4",
     "reflux": "^0.3.0",
+    "socket.io-client": "^1.3.7",
     "tcomb": "^1.1.0",
     "tcomb-form-native": "^0.2.8",
     "tcomb-validation": "^1.0.4"
